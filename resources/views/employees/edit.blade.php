@@ -64,6 +64,7 @@
 					</select><br/>
 	Phone Number : <br/><input type="text"name="phone_number" value="{{$employees->phone_number}}"><br/>
 	Profile Image : <br/><input type="file" name="profile_img" value="{{$employees->profile_img}}"><br/>
+	<img src="{{ asset('storage/'.$employees->profile_img) }}">
 	<br/><button type="submit" value="submit">SUBMIT</button><br/>
 </form>
 </body>

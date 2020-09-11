@@ -15,7 +15,7 @@
      </ul>
   </div>
 @endif
-<form action="/employees/store" method="post">
+<form action="/employees/store" method="post" enctype="multipart/form-data">
 	@csrf
 	nip : <br/><input type="text" name="nip" value="{{old('nip')}}" ><br/>
 	name : <br/><input type="text" name="name" value="{{old('name')}}" ><br/>

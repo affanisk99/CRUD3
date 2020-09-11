@@ -19,7 +19,7 @@
 		@foreach($employees as $e)
 		<td>{{$e->nip}}</td>
 		<td>{{$e->name}}</td>
-		<td>{{$e->divisions->name}}</td>
+		<td>{{$e->divisions->name ?? ''}}</td>
 		<td>
 			<a href="/employees/edit/{{$e->id}}">Edit</a>
 			<a href="/employees/delete/{{$e->id}}">Delete</a>

@@ -66,14 +66,21 @@ class employeesController extends Controller
         $fileModel = new Employees;
 
         if($request->file()) {
-            $fileName = time().'_'.$request->file->getClientOriginalName();
-            $filePath = $req->file('profile_img')->storeAs('uploads', $fileName, 'public');
 
-            $fileModel->name = time().'_'.$request->file->getClientOriginalName();
+            $fileName = time().'_'.$request->profile_img->getClientOriginalName();
+            $filePath = $request->file('profile_img')->storeAs('uploads', $fileName, 'public');
+
+            $fileModel->name = time().'_'.$request->profile_img->getClientOriginalName();
             $fileModel->file_path = '/storage/' . $filePath;
-        DB::table('employees')->insert($employees,$fileModel);
-        return redirect('/employees');
+            
+            $employees['profile_img'] = $filePath;
         }
+
+        // DB::table('employees')->insert($employees,$fileModel);
+        DB::table('employees')->insert($employees);
+
+        return redirect('/employees');
+
     }
 
     /**
