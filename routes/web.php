@@ -56,3 +56,4 @@ Route::get('employees/destroy/{id}','employeesController@destroy');
 Route::get('employees/delete/{id}','employeesController@delete');
 Route::get('employees/bin','employeesController@bin');
 Route::get('employees/rollback/{id}','employeesController@rollback');
+Route::get('employees/show/{id}','employeesController@show');

@@ -91,7 +91,12 @@ class employeesController extends Controller
      */
     public function show($id)
     {
-        //
+        $employees=DB::table('employees')->where('id',$id)->first();
+        $divisions=Divisions::get();
+        $positions=Positions::get();
+        $companies=Companies::get();
+        //dd($employees,$divisions,$positions,$companies);
+        return view('employees/show',['employees'=>$employees,'divisions'=>$divisions,'companies'=>$companies,'positions'=>$positions]);
     }
 
     /**
@@ -135,9 +140,19 @@ class employeesController extends Controller
             'phone_number'=>'required',
             'profile_img'=>'required'
         ]);
+           $fileModel = new Employees;
+
+            if($request->file()) {
+                $fileName = time().'_'.$request->profile_img->getClientOriginalName();
+                $filePath = $request->file('profile_img')->storeAs('uploads', $fileName, 'public');
+
+                $fileModel->name = time().'_'.$request->profile_img->getClientOriginalName();
+                $fileModel->file_path = '/storage/' . $filePath;
+                
+                $employees['profile_img'] = $filePath;
+            }
         DB::table('employees')->where('id',$id)->update($employees);
         return redirect('/employees');
- 
     }
 
     /**
@@ -150,7 +165,7 @@ class employeesController extends Controller
     {
         $employees=Employees::onlyTrashed()->where('id',$id);
         $employees->forcedelete();
-        return redirect('/employees');
+        return redirect('/employees/bin');
     }
     public function delete($id){
         $employees = Employees::find($id);

@@ -15,7 +15,7 @@
      </ul>
   </div>
 @endif
-<form action="/employees/update/{{$employees->id}}" method="post">
+<form action="/employees/update/{{$employees->id}}" method="post" enctype="multipart/form-data">
 	@csrf
 	nip : <br/><input type="text" name="nip" value="{{$employees->nip}}"><br/>
 	name : <br/><input type="text" name="name" value="{{$employees->name}}" ><br/>
@@ -50,8 +50,7 @@
 	Date of Birth : <br/><input type="date" name="date_of_birth" value="{{$employees->date_of_birth}}"><br/>
 	Join Date : <br/><input type="date" name="join_date" value="{{$employees->join_date}}"><br/>
 	Status : <br/><select name="status">
-						<option value="1">Aktif</option>
-						<option value="0">Tidak Aktif</option>
+						<option value="{{$employees->id}}">{{$employees->status}}</option>
 					</select><br/>
 	NPWP : <br/><input type="text"name="npwp" value="{{$employees->npwp}}"><br/>
 	KTP : <br/><input type="text"name="ktp" value="{{$employees->ktp}}"><br/>
