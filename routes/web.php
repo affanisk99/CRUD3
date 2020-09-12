@@ -16,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('sampel')->group(function(){
+	Route::view('append','sampel.append');
+	Route::post('append/store',function(){
+		// dd(request()->all());
+		$dataDetail = request()->detail;
+		
+		$model->createMany($dataDetail);
+	})->name('append.store');
+
+});
 //Positions
 Route::get('positions','positionsController@index');
 Route::get('positions/create','positionsController@create');
