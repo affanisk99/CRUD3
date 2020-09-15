@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Positions extends Model
 {
 	use SoftDeletes;
-    	protected $table="positions";
-   protected $dates=['deleted_at'];
+    protected $table="positions";
+   	protected $dates=['deleted_at'];
+   	protected $fillable = ['code','name','description','created_at','updated_at'];
 }

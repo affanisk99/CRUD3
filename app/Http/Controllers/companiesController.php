@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Companies;
+use App\Branches;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -56,7 +57,11 @@ class companiesController extends Controller
      */
     public function show($id)
     {
-        //
+        $companies=Companies::where('id',$id)->first();
+        $branches=Branches::get();
+        //dd($employees->families);
+        //dd($employees,$divisions,$positions,$companies);
+        return view('companies/show',['companies'=>$companies,'Branches'=>$branches]);
     }
 
     /**
@@ -120,5 +125,21 @@ class companiesController extends Controller
         $companies=Companies::onlyTrashed()->where('id',$id);
         $companies->restore();
         return redirect('/companies/bin');
+    }
+    public function createBranches($id){
+        $data ['company_id']=$id;
+        // dd($data);
+        return view('/branches.append',$data);
+    }
+    public function storeBranches(Request $request){
+        $companies=Companies::where('id',$request->company_id)->first();
+        $dataDetail = $request->detail;
+        // dd($dataDetail);
+        $companies->branches()->createMany($dataDetail);
+        return redirect('/companies');
+    }
+    public function deleteBranches($id){
+        Branches::find($id)->delete();
+        return redirect()->back();
     }
 }

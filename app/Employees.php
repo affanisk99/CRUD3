@@ -23,4 +23,10 @@ class Employees extends Model
    public function families(){
     return $this->hasMany(Families::class,'employee_id','id');
    }
+   public function certificates(){
+    return $this->hasMany(Certificates::class,'employee_id','id');
+   }
+   public function schools(){
+    return $this->hasMany(Schools::class,'employee_id','id');
+   }
 }

@@ -7,6 +7,8 @@ use App\Divisions;
 use App\Companies;
 use App\Positions;
 use App\Families;
+use App\Schools;
+use App\Certificates;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class employeesController extends Controller
@@ -184,9 +186,6 @@ class employeesController extends Controller
         $employees->restore();
         return redirect('/employees/bin');
     }
-    public function detail(){
-        return $this->hasMany(Families::class,'id','employee_id');
-    }
     public function createFamily($id){
       $data ['employee_id'] = $id;
         return view ('/families.append',$data);
@@ -195,10 +194,38 @@ class employeesController extends Controller
         $employees=Employees::where('id',$request->employee_id)->first();
         $dataDetail = $request->detail;
         $employees->families()->createMany($dataDetail);
-        return redirect('/employees');
+        return redirect('/families');
     }
     public function deleteFamily($id){
         Families::find($id)->delete();
+        return redirect()->back();
+    }
+    public function createCertificates($id){
+        $data['employee_id']=$id;
+        return view('/certificates.append',$data);
+    }
+    public function storeCertificates(Request $request){
+        $employees=Employees::where('id',$request->employee_id)->first();
+        $dataDetail = $request->detail;
+        $employees->certificates()->createMany($dataDetail);
+        return redirect('/employees');
+    }
+    public function deleteCertificates($id){
+        Certificates::find($id)->delete();
+        return redirect()->back();
+    }
+    public function createSchools($id){
+        $data['employee_id']=$id;
+        return view ('/schools.append',$data);
+    }
+    public function storeSchools(Request$request){
+        $employees=Employees::where('id',$request->employee_id)->first();
+        $dataDetail = $request->detail;
+        $employees->schools()->createMany($dataDetail);
+        return redirect('/employees');
+    }
+    public function deleteSchools($id){
+        Schools::find($id)->delete();
         return redirect()->back();
     }
 }

@@ -58,20 +58,48 @@
 					</select><br/>
 	Phone Number : <br/><input type="text"name="phone_number" value="{{$employees->phone_number}}" readonly=""><br/>
 	Profile Image : <br/><img src="{{ asset('storage/'.$employees->profile_img) }}"><br/>
-</form>
-families
+<br/>
+Family
 <a href="/employees/families/{{$employees->id}}">Add Family</a>
 <table>
 	@foreach($employees->families as $fam)
 	<tr>
-	<td>Nama :	{{$fam->name}}</td><br/>
-	<td>Pendidikan :	{{$fam->education_degree}}</td><br/>
-	<td>DOB :	{{$fam->date_of_birth}}</td><br/>
+		<td>Nama :	{{$fam->name}}</td><br/>
+		<td>Pendidikan :	{{$fam->education_degree}}</td><br/>
+		<td>DOB :	{{$fam->date_of_birth}}</td><br/>
 	</tr>
 	<tr>
 		<td><a href="/employees/families/delete/{{$fam->id}}">hapus</a></td>
 	</tr>
 	@endforeach
+</table><br/>
+Certificate
+<a href="/employees/certificates/{{$employees->id}}">Add Certificate</a>
+<table>
+	@foreach($employees->certificates as $cer)
+	<tr>
+		<td>Nama :	{{$cer->name}}</td><br />
+		<td>Tanggal :	{{$cer->date}}</td><br/>
+	</tr>
+	<tr>
+		<td><a href="/employees/certificates/delete/{{$cer->id}}">hapus</a></td>
+	</tr>
+	@endforeach
 </table>
+<br/>School
+<a href="/employees/schools/{{$employees->id}}">Add School</a>
+<table>
+	@foreach($employees->schools as $sch)
+	<tr>
+		<td>Nama Sekolah :	{{$sch->name}}</td><br />
+		<td>Tanggal Masuk :	{{$sch->date_start}}</td><br/>
+		<td>Tanggal Keluar : {{$sch->date_end}}</td><br/>
+	</tr>
+	<tr>
+		<td><a href="/employees/certificates/delete/{{$sch->id}}">hapus</a></td>
+	</tr>
+	@endforeach
+</table>
+</form>
 </body>
 </html>

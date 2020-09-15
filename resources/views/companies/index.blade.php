@@ -22,6 +22,7 @@
 		<td>{{$c->description}}</td>
 		<td>
 			<a href="/companies/edit/{{$c->id}}">Edit</a>
+			<a href="/companies/show/{{$c->id}}">Show</a>
 			<a href="/companies/delete/{{$c->id}}">Delete</a>
 		</td>
 	</tr>
