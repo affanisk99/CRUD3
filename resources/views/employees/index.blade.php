@@ -21,6 +21,7 @@
 		<td>{{$e->name}}</td>
 		<td>{{$e->divisions->name ?? ''}}</td>
 		<td>
+			<a href="/employees/families/{{$e->id}}">Add Family</a>
 			<a href="/employees/show/{{$e->id}}">Profile</a>
 			<a href="/employees/edit/{{$e->id}}">Edit</a>
 			<a href="/employees/delete/{{$e->id}}">Delete</a>

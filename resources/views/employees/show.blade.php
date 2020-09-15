@@ -59,5 +59,19 @@
 	Phone Number : <br/><input type="text"name="phone_number" value="{{$employees->phone_number}}" readonly=""><br/>
 	Profile Image : <br/><img src="{{ asset('storage/'.$employees->profile_img) }}"><br/>
 </form>
+families
+<a href="/employees/families/{{$employees->id}}">Add Family</a>
+<table>
+	@foreach($employees->families as $fam)
+	<tr>
+	<td>Nama :	{{$fam->name}}</td><br/>
+	<td>Pendidikan :	{{$fam->education_degree}}</td><br/>
+	<td>DOB :	{{$fam->date_of_birth}}</td><br/>
+	</tr>
+	<tr>
+		<td><a href="/employees/families/delete/{{$fam->id}}">hapus</a></td>
+	</tr>
+	@endforeach
+</table>
 </body>
 </html>

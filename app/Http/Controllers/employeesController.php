@@ -6,6 +6,7 @@ use App\Employees;
 use App\Divisions;
 use App\Companies;
 use App\Positions;
+use App\Families;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class employeesController extends Controller
@@ -91,10 +92,12 @@ class employeesController extends Controller
      */
     public function show($id)
     {
-        $employees=DB::table('employees')->where('id',$id)->first();
+        // $employees=DB::table('employees')->where('id',$id)->first();
+        $employees=Employees::where('id',$id)->first();
         $divisions=Divisions::get();
         $positions=Positions::get();
         $companies=Companies::get();
+        //dd($employees->families);
         //dd($employees,$divisions,$positions,$companies);
         return view('employees/show',['employees'=>$employees,'divisions'=>$divisions,'companies'=>$companies,'positions'=>$positions]);
     }
@@ -180,5 +183,22 @@ class employeesController extends Controller
         $employees=Employees::onlyTrashed()->where('id',$id);
         $employees->restore();
         return redirect('/employees/bin');
+    }
+    public function detail(){
+        return $this->hasMany(Families::class,'id','employee_id');
+    }
+    public function createFamily($id){
+      $data ['employee_id'] = $id;
+        return view ('/families.append',$data);
+    }
+    public function storeFamily(Request $request){
+        $employees=Employees::where('id',$request->employee_id)->first();
+        $dataDetail = $request->detail;
+        $employees->families()->createMany($dataDetail);
+        return redirect('/employees');
+    }
+    public function deleteFamily($id){
+        Families::find($id)->delete();
+        return redirect()->back();
     }
 }

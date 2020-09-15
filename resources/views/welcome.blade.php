@@ -89,6 +89,7 @@
                     <a href="/divisions">Division</a>
                     <a href="/companies">Company</a>
                     <a href="/employees">Employee</a>
+                    <a href="/families">Family</a>
                 </div>
             </div>
         </div>

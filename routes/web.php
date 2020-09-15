@@ -17,16 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('sampel')->group(function(){
-	Route::view('append','sampel.append');
-	Route::post('append/store',function(){
-		// dd(request()->all());
-		$dataDetail = request()->detail;
-		
-		$model->createMany($dataDetail);
-	})->name('append.store');
-
-});
 //Positions
 Route::get('positions','positionsController@index');
 Route::get('positions/create','positionsController@create');
@@ -68,3 +58,6 @@ Route::get('employees/delete/{id}','employeesController@delete');
 Route::get('employees/bin','employeesController@bin');
 Route::get('employees/rollback/{id}','employeesController@rollback');
 Route::get('employees/show/{id}','employeesController@show');
+Route::get('employees/families/{id}','employeesController@createFamily')->name('employee.family');
+Route::post('employees/families/store','employeesController@storeFamily')->name('employee.store');
+Route::get('employees/families/delete/{id}','employeesController@deleteFamily');
